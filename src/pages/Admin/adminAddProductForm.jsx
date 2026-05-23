@@ -26,7 +26,7 @@ export default function AdminAddProductForm() {
                     <button className="bg-green-600 text-white w-[100px] text-center py-2 rounded-lg cursor-pointer " >Save</button>
                 </div>
             </div>
-            <div className="w-full h-[300px] p-4 flex border">
+            <div className="w-full p-4 flex flex-wrap">
                 <div className="w-[25%] h-[70px] flex-col px-2">
                     <label className="font-semibold">Product ID</label>  
                     <input value={productId} onChange={(e)=>{
@@ -45,6 +45,24 @@ export default function AdminAddProductForm() {
                     <input value={altnames} onChange={(e)=>{
                         setAltnames(e.target.value)
                     }} className="w-full h-[40px] border rounded-lg px-2 " placeholder="GPU,VGA,Graphic Card"/>
+                </div>
+                <div className="w-[25%] h-[70px] flex-col px-2">
+                    <label className="font-semibold">Price</label>  
+                    <input value={price} onChange={(e)=>{
+                        setPrice(e.target.value)
+                    }} className="w-full h-[40px] border rounded-lg px-2 " placeholder="1000"/>
+                </div>
+                <div className="w-[25%] h-[70px] flex-col px-2">
+                    <label className="font-semibold">Labeled Price</label>  
+                    <input value={labeledprice} onChange={(e)=>{
+                        setLabeledPrice(e.target.value)
+                    }} className="w-full h-[40px] border rounded-lg px-2 " placeholder="1500"/>
+                </div>
+                <div className="w-full h-[70px] flex-col px-2">
+                    <label className="font-semibold">Description</label>  
+                    <textarea value={description} onChange={(e)=>{
+                        setDescription(e.target.value)
+                    }} className="w-full h-[40px] border rounded-lg px-2 " placeholder="Enter product description"/>
                 </div>
             </div>
         </div>

@@ -7,7 +7,7 @@ import AdminAddProductForm from "./Admin/adminAddProductForm";
 
 export default function AdminPage(){
     return(
-        <div className="w-full h-full flex bg-primary">
+        <div className="w-full h-full flex bg-white">
 
             <div className="w-[300px] h-full bg-white flex flex-col shadow-2xl">
                 <div className="w-full h-[100px] py-4 px-2">
