@@ -1,7 +1,7 @@
 import React from "react"
 import { useState } from "react";
 import { Link } from "react-router-dom";
-import { Toaster }  from "react-hot-toast";
+import toast, { Toaster }  from "react-hot-toast";
 import api from "../../utils/api";
 import { useNavigate } from "react-router-dom";
 import fileUpload from "../../utils/mediaUpload";
@@ -81,7 +81,7 @@ export default function AdminAddProductForm() {
    
     return (
         <div className="h-full w-full flex items-center flex-col">
-            <Toaster />
+        
             <div className="w-full h-[100px]  bg-white shadow-2xl rounded-lg flex p-4 item-center justify-between">
                 <h1 className="text-2xl  font-semibold">Add New Product</h1>
                 <div className="h-full gap-4 flex items-center" >
