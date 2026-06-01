@@ -34,7 +34,6 @@ export default function Login(){
 
     return(
         <div className=" bg-[url('/login-bg.jpg')] w-full h-full flex justify-center items-center">
-            <Toaster />
             
             <div className="w-[400px] h-[600px] backdrop-blur-md shadow-2xl shadow-white rounded-xl flex-col p-4">
                 <h1 className="w-full h-[80px] text-center text-3xl font-bold text-amber-50">Login</h1>
