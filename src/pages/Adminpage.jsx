@@ -4,6 +4,7 @@ import { TbUsers } from "react-icons/tb";
 import { Link, Route, Routes } from "react-router-dom";
 import AdminProductsPage from "./Admin/adminproductpage";
 import AdminAddProductForm from "./Admin/adminAddProductForm";
+import AdminEditProductForm from "./Admin/adminEditProduct";
 
 export default function AdminPage(){
     return(
@@ -39,6 +40,7 @@ export default function AdminPage(){
                     <Route path="products" element={<AdminProductsPage />} />
                     <Route path="users" element={<h1>Users Page</h1>} />
                     <Route path="addproduct" element={<AdminAddProductForm />} />
+                    <Route path="editproduct/:productId" element={<AdminEditProductForm />} />
                 </Routes>
             </div>
         </div>

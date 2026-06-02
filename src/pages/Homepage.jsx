@@ -1,7 +1,17 @@
+import { Route, Routes } from "react-router-dom";
+import Header from "../components/header";
+import Productspage from "./Productspage";
+
 export default function Home(){
     return(
-        <div>
-            Home Page
+        <div className="w-full h-full bg-primary">
+            <Header />
+            <Routes>
+                <Route path="/" element={<h1>Home Page</h1>} />
+                <Route path="/products" element={<Productspage /> }/>
+                <Route path="contact" element={<h1>Contact page</h1>} />
+                <Route path="/*" element={<h1>404 not found</h1>} />
+            </Routes>
         </div>
     )
 }

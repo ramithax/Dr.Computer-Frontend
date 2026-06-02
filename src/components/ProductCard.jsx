@@ -1,13 +1,12 @@
 export default function ProductCard(props){
 
-    console.log(props)
+    const product = props.product
 
     return (
-        <div className="border w-56 h-80">
-            <h1>{props.name}</h1>
+        <div className="w-72 h-96 bg-white rounded-lg shadow-xl ">
+            <img src={product.images[0]} className="w-full h-3/4 object-cover rounded-tr-lg"/>
 
-            <img src={props.photo} className="w-40 h-40" />
-            <p>{props.price}</p>
+            <p>{product.price}</p>
         </div>
     )
 }

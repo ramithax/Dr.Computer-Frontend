@@ -4,6 +4,8 @@ import { Link } from "react-router-dom";
 import api from "../../utils/api";
 import LoadingScreen from "../../components/loadingScreen";
 import DeleteButton from "../../components/DeleteButton";
+import { CiEdit } from "react-icons/ci";
+import AdminEditProductForm from "./adminEditProduct";
 
 
 export default function AdminProductsPage() {
@@ -78,6 +80,9 @@ export default function AdminProductsPage() {
 								<td>{product.stock}</td>
 								<td>
 									<div className="w-full flex justify-center items-center gap-4">
+										<Link to={`/admin/editproduct/${product.productId}`} state={product}>
+  											<CiEdit className="text-blue-600 text-xl rounded-full hover:cursor-pointer"/>
+										</Link>
 										<DeleteButton productId={product.productId} refresh={()=>setLoading(true)} />
 									</div>
 								</td>
