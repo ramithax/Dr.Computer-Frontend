@@ -6,6 +6,7 @@ import LoadingScreen from "../../components/loadingScreen";
 import DeleteButton from "../../components/DeleteButton";
 import { CiEdit } from "react-icons/ci";
 import AdminEditProductForm from "./adminEditProduct";
+import getFormattedPrice from "../../utils/price-Formatter";
 
 
 export default function AdminProductsPage() {
@@ -60,6 +61,11 @@ export default function AdminProductsPage() {
 				</thead>
 				<tbody>
 					{products.map((product) => {
+						const labelledPrice = product.labeledprice ?? product.labelledPrice
+						const normalizedProduct = {
+							...product,
+							labeledprice: product.labeledprice ?? product.labelledPrice,
+						}
 						return (
 							<tr className="odd:bg-gray-300 even:bg-white h-[60px]" key={product.productId}>
 								<td>
@@ -71,8 +77,8 @@ export default function AdminProductsPage() {
 								</td>
 								<td>{product.productId}</td>
 								<td>{product.name}</td>
-								<td>{product.price}</td>
-								<td>{product.labelledPrice}</td>
+								<td>{getFormattedPrice(product.price)}</td>
+								<td>{getFormattedPrice(labelledPrice)}</td>
 								<td>{product.brand}</td>
 								<td>{product.model}</td>
 								<td>{product.category}</td>
@@ -80,7 +86,7 @@ export default function AdminProductsPage() {
 								<td>{product.stock}</td>
 								<td>
 									<div className="w-full flex justify-center items-center gap-4">
-										<Link to={`/admin/editproduct/${product.productId}`} state={product}>
+										<Link to={`/admin/editproduct/${product.productId}`} state={normalizedProduct}>
   											<CiEdit className="text-blue-600 text-xl rounded-full hover:cursor-pointer"/>
 										</Link>
 										<DeleteButton productId={product.productId} refresh={()=>setLoading(true)} />
