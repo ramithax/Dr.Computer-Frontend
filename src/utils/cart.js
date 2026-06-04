@@ -1,9 +1,3 @@
-const sample = [
-    {},
-    {},
-    {}
-]
-
 export function getCart(){
     const cartString = localStorage.getItem("cart")
 
@@ -15,40 +9,38 @@ export function getCart(){
     return cart
 }
 
-export function addToCart(product,qty){
+export function addToCart(product, qty) {
     const cart = getCart()
 
     const existingProductIndex = cart.findIndex(
-        (item) => {
-            return item.productId === product.productId
-        }
+        (item) => item.product.productId === product.productId
     )
 
-    if(existingProductIndex == -1 && qty > 0){
+    if (existingProductIndex === -1 && qty > 0) {
         cart.push({
-            productId : product.productId,
-            name : product.name,
-            image : product.images[0],
-            price : product.price,
-            labelledPrice : product.labelledPrice,
-            qty: qty
+            product: {
+                productId: product.productId,
+                name: product.name,
+                image: product.images[0],
+                price: product.price,
+                labelledPrice: product.labelledPrice,
+            },
+            qty: qty,
         })
-    }
-    if(existingProductIndex != -1){
-
+    } else if (existingProductIndex !== -1) {
         cart[existingProductIndex].qty += qty
-        if(cart[existingProductIndex].qty <= 1){
+
+        if (cart[existingProductIndex].qty <= 0) {
             cart.splice(existingProductIndex, 1)
         }
     }
 
-    const cartString = JSON.stringify(cart)
-    localStorage.setItem("cart",cartString)
+    localStorage.setItem("cart", JSON.stringify(cart))
 }
 
-export function getTotal(cart){
-    const cart = getCart()
 
+export function getTotal(cart){
+    
     let total = 0
 
     cart.forEach((item) => {
