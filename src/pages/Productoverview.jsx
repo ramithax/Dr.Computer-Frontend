@@ -49,7 +49,14 @@ export default function ProductOverview(){
                         ))}
                         </h1>
                         {
-                            product.price < product.labelledPrice && <p className="text-gray-500 text-lg line-through mb-2">{getFormattedPrice(product.labelledPrice)}</p>
+                            (() => {
+                                const labelledPrice = product.labeledprice ?? product.labelledPrice
+                                const currentPrice = Number(product.price)
+                                const originalPrice = Number(labelledPrice)
+                                return labelledPrice != null && !isNaN(currentPrice) && !isNaN(originalPrice) && currentPrice < originalPrice ? (
+                                    <p className="text-gray-500 text-lg line-through mb-2">{getFormattedPrice(labelledPrice)}</p>
+                                ) : null
+                            })()
                         }
                         <p className="text-xl text-accent font-semibold ">{getFormattedPrice(product.price)}</p>
                         <p className="text-gray-700 mt-6">{product.description}</p>
