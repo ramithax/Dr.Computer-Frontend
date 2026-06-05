@@ -17,13 +17,15 @@ export function addToCart(product, qty) {
     )
 
     if (existingProductIndex === -1 && qty > 0) {
+        const labelledPrice = product.labeledprice ?? product.labelledPrice
         cart.push({
             product: {
                 productId: product.productId,
                 name: product.name,
                 image: product.images[0],
                 price: product.price,
-                labelledPrice: product.labelledPrice,
+                labelledPrice,
+                labeledprice: labelledPrice,
             },
             qty: qty,
         })
@@ -44,7 +46,8 @@ export function getTotal(cart){
     let total = 0
 
     cart.forEach((item) => {
-        total += item.price * item.qty
+        const price = item.product?.price ?? item.price
+        total += Number(price) * item.qty
     })
 
     return total

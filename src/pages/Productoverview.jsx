@@ -68,12 +68,23 @@ export default function ProductOverview(){
                                     toast.success("Product added to cart")
                                 }
                             } >Add to Cart</button>
-                            <button className="w-[220px] p-2 text-white bg-accent rounded-sm hover:bg-accent/90 mt-6" onClick ={
-                                () => {
-                                    const cart = getCart()
-                                    console.log(cart)
-                                }
-                            } >Buy Now</button>
+                            <Link className="w-[220px] p-2 text-white bg-accent rounded-sm hover:bg-accent/90 mt-6" 
+                              to="/checkout" 
+                              state={
+[
+                                    {
+                                        product : {
+                                            productId : product.productId,
+                                            name : product.name,
+                                            image : product.images[0],
+                                            price : product.price,
+                                            labelledPrice : product.labelledPrice
+                                        },
+                                        qty : 1
+                                    }
+                                ]
+                              }  
+                             >Buy Now</Link>
                         </div>
                     </div>
 

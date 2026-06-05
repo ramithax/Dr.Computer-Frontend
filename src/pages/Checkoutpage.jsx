@@ -1,11 +1,13 @@
 import { useState } from "react"
 import { addToCart, getCart, getTotal } from "../utils/cart"
 import getFormattedPrice from "../utils/price-formatter"
-import { Link } from "react-router-dom"
+import { Link, useLocation } from "react-router-dom"
 
-export default function CartPage(){
+export default function Chechoutpage(){
 
-    const [cart , setCart] = useState(getCart())
+    const location = useLocation()
+    const initialCart = Array.isArray(location.state) ? location.state : getCart()
+    const [cart , setCart] = useState(initialCart)
 
     return (
         <div className="w-full h-full overflow-y-scroll flex items-center flex-col">
@@ -25,8 +27,7 @@ export default function CartPage(){
                                         <button className="w-[30px] h-full hover:bg-accent hover:text-white"
                                         onClick={
                                             ()=>{
-                                                addToCart(cartItem.product , -1)
-                                                setCart(getCart())
+
                                             }
                                         }>
                                             -
@@ -37,23 +38,13 @@ export default function CartPage(){
                                         <button className="w-[30px] h-full hover:bg-accent hover:text-white"
                                         onClick={
                                             ()=>{
-                                                addToCart(cartItem.product , 1)
-                                                setCart(getCart())
                                             }
                                         }>
                                             +
                                         </button>
                                     </div>
                                 </div>
-                                <span className="absolute top-2 right-2 text-gray-500 cursor-pointer hover:text-red-700"
-                                onClick={
-                                    ()=>{
-                                        addToCart(cartItem.product , -cartItem.qty)
-                                        setCart(getCart())
-                                    }
-                                }>
-                                    X
-                                </span>
+                                
                                 {/* total price */}
                                 <span className="absolute bottom-2 text-xl right-2 text-accent font-semibold">
                                     {getFormattedPrice(cartItem.product.price * cartItem.qty)}
@@ -66,7 +57,7 @@ export default function CartPage(){
 
             <div className="w-[600px] h-[150px] sticky bottom-0  shadow-2xl bg-white my-4 flex flex-row items-center justify-between p-4">
                 <Link to="/checkout" className="w-[220px] p-2 text-white bg-accent rounded-sm hover:bg-accent/90 text-center" state={cart}>
-                    Checkout
+                    Order Now
                 </Link>
                 <div className="flex justify-end h-full items-center">
                     <span className="text-gray-500 text-lg mr-4">Total:</span>
