@@ -27,6 +27,13 @@ export default function Chechoutpage(){
                                         <button className="w-[30px] h-full hover:bg-accent hover:text-white"
                                         onClick={
                                             ()=>{
+                                                const newcart = [...cart]
+                                                const newQty = newcart[index].qty - 1
+
+                                                if (newQty > 0) {
+                                                    newcart[index].qty = newQty
+                                                    setCart(newcart)
+                                                }
 
                                             }
                                         }>
@@ -38,6 +45,12 @@ export default function Chechoutpage(){
                                         <button className="w-[30px] h-full hover:bg-accent hover:text-white"
                                         onClick={
                                             ()=>{
+                                                const newcart = [...cart]
+                                                const newQty = newcart[index].qty + 1
+                                                // const newcaty = {...cart} 
+                                                                                                
+                                                newcart[index].qty = newQty
+                                                setCart(newcart)
                                             }
                                         }>
                                             +

@@ -32,7 +32,7 @@ export default function Productspage(){
                     {
                         products.map((product)=>{
                             return(
-                                <Productcard key={product.productId} product={product} />
+                                <Productcard key={product.productId} product={product} key={product.productId}/>
                             )
                         })
                     }
