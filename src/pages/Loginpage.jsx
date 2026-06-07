@@ -2,6 +2,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { useState } from "react";
 import toast, { Toaster } from "react-hot-toast";
 import api from "../utils/api";
+import { BsGoogle } from "react-icons/bs";
 
 export default function Login(){
 
@@ -58,11 +59,13 @@ export default function Login(){
                     />
                 </div>
                 <p className="w-full h-2 text-sm mt-5 text-white text-left">Forgot your Password? click{" "}<Link className="font-bold text-accent" to="/forget_pq">Here</Link></p>
-                <button disabled={loading} className="w-full h-[40px] mt-6 bg-[#E36A6A] text-white rounded-md hover:bg-[#E36A6A]/80 transition duration-300" onClick={handlelogin}>{
+                <button disabled={loading} className="w-full h-[40px] mt-6 bg-accent text-white rounded-md hover:bg-[#E36A6A]/80 transition duration-300" onClick={handlelogin}>{
                     loading ? "Loading..." : "Login"
                 }
                 </button>
                 <p className="w-full h-2 text-sm mt-5 text-white text-left">Don't have a account? click{" "}<Link className="font-bold text-accent" to="/forget_pq">Here</Link></p>
+                <button className="w-full h-[50px] bg-accent mt-5 text-white rounded-lg flex justify-center items-center gap-2"><BsGoogle/> Sign In with Google</button>
+
             </div>
         </div>
     )
