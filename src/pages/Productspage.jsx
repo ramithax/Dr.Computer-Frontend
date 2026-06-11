@@ -1,38 +1,38 @@
-import {useState,useEffect} from 'react'
+import { useState, useEffect } from 'react'
 import api from '../utils/api'
 import LoadingScreen from '../components/loadingScreen'
 import Productcard from '../components/ProductCard'
 
-export default function Productspage(){
+export default function Productspage() {
 
-        const [products,setProducts]=useState([])
-        const [loading,setLoading]=useState(true) 
+    const [products, setProducts] = useState([])
+    const [loading, setLoading] = useState(true)
 
-        useEffect(()=>{
-            if(loading){
-                api.get("/products").then((res)=>{
-                    setProducts(res.data)
-                    setLoading(false)
-                }).catch((err)=>{
-                    console.log(err)
-                    setLoading(false)
-                })
-            }
-        },[loading])
+    useEffect(() => {
+        if (loading) {
+            api.get("/products").then((res) => {
+                setProducts(res.data)
+                setLoading(false)
+            }).catch((err) => {
+                console.log(err)
+                setLoading(false)
+            })
+        }
+    }, [loading])
 
-    return(
+    return (
 
         <div className="w-full h-full flex-wrap gap-6 flex justify-center items-center">
             {
                 loading && <LoadingScreen />
             }
             {
-                !loading && 
+                !loading &&
                 <>
                     {
-                        products.map((product)=>{
-                            return(
-                                <Productcard key={product.productId} product={product} key={product.productId}/>
+                        products.map((product) => {
+                            return (
+                                <Productcard key={product.productId} product={product} />
                             )
                         })
                     }
