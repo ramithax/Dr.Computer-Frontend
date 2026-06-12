@@ -5,15 +5,16 @@ import { Link, Route, Routes } from "react-router-dom";
 import AdminProductsPage from "./Admin/adminproductpage";
 import AdminAddProductForm from "./Admin/adminAddProductForm";
 import AdminEditProductForm from "./Admin/adminEditProduct";
+import AdminOrdersPage from "./Admin/adminOrdersPage";
 
-export default function AdminPage(){
-    return(
+export default function AdminPage() {
+    return (
         <div className="w-full h-full flex bg-white">
 
             <div className="w-[300px] h-full bg-white flex flex-col shadow-2xl">
                 <div className="w-full h-[100px] py-4 px-2">
-                        
-                        <img src="/logo.png" className="h-full "/>
+
+                    <img src="/logo.png" className="h-full " />
 
                 </div>
 
@@ -31,12 +32,12 @@ export default function AdminPage(){
                     <TbUsers />
                     <span className="w-full h-full block ">Users</span>
                 </Link>
-                
+
             </div>
 
             <div className="w-[calc(100%-300px)] h-full p-4">
                 <Routes>
-                    <Route index element={<h1>Orders Page</h1>} />
+                    <Route path="/" element={<AdminOrdersPage />} />
                     <Route path="products" element={<AdminProductsPage />} />
                     <Route path="users" element={<h1>Users Page</h1>} />
                     <Route path="addproduct" element={<AdminAddProductForm />} />
