@@ -5,6 +5,7 @@ import api from "../../utils/api";
 import LoadingScreen from "../../components/loadingScreen";
 import getFormattedPrice from "../../utils/price-Formatter";
 import formatTimestamp from "../../utils/date-formatter";
+import AdminOrderModal from "../../components/orderModal";
 
 
 export default function AdminOrdersPage() {
@@ -12,21 +13,21 @@ export default function AdminOrdersPage() {
 	const [loading, setLoading] = useState(true);
 	const [pageNumber, setPageNumber] = useState(1);
 	const [pageSize, setPageSize] = useState(10);
-	const [orderCount, setOrderCount] = useState(0);
+	const [totalOrders, setTotalOrders] = useState(0);
+	const [totalPages, setTotalPages] = useState(1);
 
 	useEffect(() => {
 		if (loading) {
-			console.log("calling");
 			const token = localStorage.getItem("token");
-			api.get("/order/1/10", {
+			api.get("/order/" + pageNumber + "/" + pageSize, {
 				headers: {
 					Authorization: `Bearer ${token}`,
 				},
 			})
 				.then((res) => {
-					console.log("got it");
-					console.log(res.data.orders);
 					setOrders(res.data.orders);
+					setTotalOrders(res.data.totalOrders);
+					setTotalPages(res.data.totalPages);
 					setLoading(false);
 				});
 		}
@@ -35,11 +36,11 @@ export default function AdminOrdersPage() {
 	//backend call products fetch and setProducts
 
 	return (
-		<div className="w-full h-full ">
+		<div className="w-full h-full flex flex-col items-center">
 			<div className="w-full h-[100px] bg-white shadow-2xl mb-10 rounded-lg flex p-4 items-center justify-between">
 				<h1 className="text-2xl font-semibold">All Orders</h1>
 				<div className="h-full gap-4 flex items-center">
-					{orders.length} Orders
+					{totalOrders}
 				</div>
 			</div>
 			{
@@ -71,19 +72,31 @@ export default function AdminOrdersPage() {
 								<td>{order.phone}</td>
 								<td>{order.status}</td>
 								<td>{getFormattedPrice(order.totalAmount)}</td>
-								<td>hi</td>
+								<td>
+									<div className="w-full flex justify-center items-center gap-4">
+										<AdminOrderModal isAdmin={true} order={order} refresh={() => setLoading(true)} />
+									</div>
+								</td>
 							</tr>
 						);
 					})}
 				</tbody>
 			</table>
 
-			<Link
-				to="/admin/add-product"
-				className="bg-accent w-[80px] h-[80px] rounded-full text-white text-2xl flex justify-center items-center fixed bottom-4 right-4 shadow-2xl hover:bg-white hover:text-accent"
-			>
-				<FaPlus />
-			</Link>
-		</div>
+			<div className="p-2 fixed bottom-4 bg-white shadow-2xl flex justify-center items-center">
+				<select value={pageSize} onChange={(e) => { setPageSize(Number(e.target.value)); setLoading(true) }} className="h-full px-4 border-r">
+					<option value={2}>2 per page</option>
+					<option value={5}>5 per page</option>
+					<option value={10}>10 per page</option>
+					<option value={20}>20 per page</option>
+				</select>
+				<div className="h-full flex items-center justify-center gap-4">
+					<button disabled={pageNumber === 1} onClick={() => { setPageNumber(pageNumber - 1); setLoading(true) }} className="px-4 py-2 bg-gray-300 rounded disabled:bg-gray-200">Previous</button>
+					<span>Page {pageNumber} of {totalPages}</span>
+					<button disabled={pageNumber === totalPages} onClick={() => { setPageNumber(pageNumber + 1); setLoading(true) }} className="px-4 py-2 bg-gray-300 rounded disabled:bg-gray-200">Next</button>
+				</div>
+			</div>
+
+		</div >
 	);
 }
