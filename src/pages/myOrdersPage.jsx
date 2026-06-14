@@ -1,12 +1,12 @@
 import { useEffect, useState } from "react";
-import api from "../../utils/api";
-import LoadingScreen from "../../components/loadingScreen";
-import getFormattedPrice from "../../utils/price-Formatter";
-import formatTimestamp from "../../utils/date-formatter";
-import AdminOrderModal from "../../components/orderModal";
+import api from "../utils/api";
+import LoadingScreen from "../components/loadingScreen";
+import getFormattedPrice from "../utils/price-Formatter";
+import formatTimestamp from "../utils/date-formatter";
+import AdminOrderModal from "../components/orderModal";
 
 
-export default function AdminOrdersPage() {
+export default function MyOrdersPage() {
 	const [orders, setOrders] = useState([]);
 	const [loading, setLoading] = useState(true);
 	const [pageNumber, setPageNumber] = useState(1);
@@ -36,7 +36,7 @@ export default function AdminOrdersPage() {
 	return (
 		<div className="w-full h-full flex flex-col items-center">
 			<div className="w-full h-[100px] bg-white shadow-2xl mb-10 rounded-lg flex p-4 items-center justify-between">
-				<h1 className="text-2xl font-semibold">All Orders</h1>
+				<h1 className="text-2xl font-semibold">My Orders</h1>
 				<div className="h-full gap-4 flex items-center">
 					{totalOrders}
 				</div>
@@ -72,7 +72,7 @@ export default function AdminOrdersPage() {
 								<td>{getFormattedPrice(order.totalAmount)}</td>
 								<td>
 									<div className="w-full flex justify-center items-center gap-4">
-										<AdminOrderModal isAdmin={true} order={order} refresh={() => setLoading(true)} />
+										<AdminOrderModal isAdmin={false} order={order} refresh={() => setLoading(true)} />
 									</div>
 								</td>
 							</tr>

@@ -1,21 +1,23 @@
 import { BiCart } from "react-icons/bi";
 import { Link } from "react-router-dom";
+import UserData from "./userData";
 
-export default function Header(){
-    return(
+export default function Header() {
+    return (
         <header className="w-full h-[100px] bg-accent flex justify-between p-6">
             <Link to="/">
-                <img src="/logo.png" className="h-full "/>
+                <img src="/logo.png" className="h-full " />
             </Link>
             <div className=" h-full flex justify-center items-center gap-4">
                 <Link to="/" className="h-full flex justify-center items-center text-white hover:text-gray-300">Home</Link>
                 <Link to="/products" className="h-full flex justify-center items-center text-white hover:text-gray-300">Products</Link>
                 <Link to="/contact-us" className="h-full flex justify-center items-center text-white hover:text-gray-300">Contact Us</Link>
             </div>
-            <div className="">
+            <div className="flex justify-center items-center gap-4">
                 <Link to="/cart" className="h-full flex justify-center items-center text-white hover:text-gray-900 px-4">
-                    <BiCart size={24}/>
+                    <BiCart size={24} />
                 </Link>
+                <UserData />
             </div>
         </header>
     )
