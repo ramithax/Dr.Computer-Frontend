@@ -3,9 +3,9 @@ import { Link, useNavigate, useParams } from "react-router-dom"
 import api from "../utils/api"
 import LoadingScreen from "../components/loadingScreen"
 import ProductImageSlideShow from "../components/productImageSlideShow"
-import getFormattedPrice from "../utils/price-formatter"
 import toast from "react-hot-toast"
 import { addToCart, getCart } from "../utils/cart"
+import getFormattedPrice from "../utils/price-formatter"
 
 export default function ProductOverview() {
     const parameters = useParams()
