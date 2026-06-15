@@ -22,7 +22,7 @@ export default function Productspage() {
 
     return (
 
-        <div className="w-full h-full flex-wrap gap-6 flex justify-center items-center">
+        <div className="w-full h-auto lg:h-full flex-wrap gap-6 flex flex-col lg:flex-row lg:justify-center items-center">
             {
                 loading && <LoadingScreen />
             }
