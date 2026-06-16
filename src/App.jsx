@@ -10,18 +10,20 @@ function App() {
   
 
   return (
-    <div className="h-screen w-full bg-[#937181]">
+    <div className="min-h-screen w-full flex flex-col">
       
       <Toaster position="top-right" />
 
-      <Routes>
-         
-        <Route path="/login" element={<Login/>}/>
-        <Route path="/signup" element={<Register/>}/>
-        <Route path="/admin/*" element={<Admin/>}/>
-        <Route path="/*" element={<Home/>}/>
+      <div className="flex-grow">
+        <Routes>
+           
+          <Route path="/login" element={<Login/>}/>
+          <Route path="/signup" element={<Register/>}/>
+          <Route path="/admin/*" element={<Admin/>}/>
+          <Route path="/*" element={<Home/>}/>
 
-      </Routes>
+        </Routes>
+      </div>
     </div>
   )
 }

@@ -29,18 +29,18 @@ export default function UserData() {
     return (
         <>
             {
-                user == null ? <div>
-                    <Link to="/login" className="text-white hover:text-gray-500">
+                user == null ? <div className="text-sm font-medium">
+                    <Link to="/login" className="text-slate-600 dark:text-slate-300 hover:text-accent dark:hover:text-accent-dark transition-colors">
                         Login
                     </Link>
-                    <span className="text-white"> | </span>
-                    <Link to="/register" className="text-white hover:text-gray-500">
+                    <span className="text-slate-400 mx-1"> | </span>
+                    <Link to="/register" className="text-slate-600 dark:text-slate-300 hover:text-accent dark:hover:text-accent-dark transition-colors">
                         Register
                     </Link>
                 </div> :
-                    <div className="text-white">
-                        <img src={user.image} className="w-6 h-6 rounded-full inline-block mr-2" />
-                        <select className="bg-transparent border-b outline-none inline-block " value={value} onChange={
+                    <div className="text-slate-700 dark:text-slate-200 flex items-center font-medium">
+                        <img src={user.image} className="w-8 h-8 rounded-full inline-block mr-2 border border-slate-200 dark:border-slate-700" alt="User Profile" />
+                        <select className="bg-transparent outline-none cursor-pointer text-sm" value={value} onChange={
                             (e) => {
                                 const selected = e.target.value;
                                 setValue(selected);
@@ -57,10 +57,10 @@ export default function UserData() {
                                 }
                             }
                         }>
-                            <option value="me">{user.firstname}</option>
-                            <option value="settings" className="bg-accent text-white">Settings</option>
-                            <option value="my-orders" className="bg-accent text-white">My orders</option>
-                            <option value="logout" className="bg-accent text-white">Logout</option>
+                            <option value="me" className="text-slate-900">{user.firstname}</option>
+                            <option value="settings" className="text-slate-900">Settings</option>
+                            <option value="my-orders" className="text-slate-900">My orders</option>
+                            <option value="logout" className="text-slate-900">Logout</option>
                         </select>
 
                     </div>
