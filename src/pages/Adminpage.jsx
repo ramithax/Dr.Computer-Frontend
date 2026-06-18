@@ -1,13 +1,45 @@
 import { BsGift } from "react-icons/bs";
 import { FiShoppingCart } from "react-icons/fi";
 import { TbUsers } from "react-icons/tb";
-import { Link, Route, Routes } from "react-router-dom";
+import { Link, Route, Routes, useNavigate } from "react-router-dom";
 import AdminProductsPage from "./Admin/adminproductpage";
 import AdminAddProductForm from "./Admin/adminAddProductForm";
 import AdminEditProductForm from "./Admin/adminEditProduct";
 import AdminOrdersPage from "./Admin/adminOrdersPage";
+import api from "../utils/api";
+import { useState, useEffect } from "react";
+import LoadingScreen from "../components/loadingScreen";
 
 export default function AdminPage() {
+
+    const [user, setUser] = useState(null)
+    const navigate = useNavigate()
+
+    useEffect(() => {
+        const token = localStorage.getItem("token");
+
+        if (token != null) {
+            api.get("/users/me", {
+                headers: {
+                    Authorization: `Bearer ${token}`
+                }
+            }).then((res) => {
+                if (!res.data.user.isadmin) {
+                    toast.error("You are not authorized to access admin page")
+                    navigate("/")
+                }
+                setUser(res.data.user)
+            }).catch((error) => {
+                setUser(null)
+                navigate("/")
+                toast.error(error?.response?.data?.message || "An error occurred during login.");
+            })
+        } else {
+            navigate("/")
+        }
+
+    }, [])
+
     return (
         <div className="w-full h-full flex bg-white">
 
@@ -36,6 +68,7 @@ export default function AdminPage() {
             </div>
 
             <div className="w-[calc(100%-300px)] h-full p-4">
+                user == null ? <LoadingScreen /> :
                 <Routes>
                     <Route path="/" element={<AdminOrdersPage />} />
                     <Route path="products" element={<AdminProductsPage />} />

@@ -5,6 +5,7 @@ import ProductOverview from "./Productoverview";
 import Cartpage from "./Cartpage";
 import Checkoutpage from "./Checkoutpage";
 import MyOrdersPage from "./myOrdersPage";
+import Settings from "./Settings";
 import { Link } from "react-router-dom";
 
 const HeroSection = () => (
@@ -31,6 +32,7 @@ export default function Home() {
                 <Route path="/contact" element={<h1>Contact page</h1>} />
                 <Route path="/overview/:productId" element={<ProductOverview />} />
                 <Route path="/cart" element={<Cartpage />} />
+                <Route path="/settings" element={<Settings />} />
                 <Route path="/checkout" element={<Checkoutpage />} />
                 <Route path="/my-orders" element={<MyOrdersPage />} />
                 <Route path="/*" element={<h1>404 not found</h1>} />
