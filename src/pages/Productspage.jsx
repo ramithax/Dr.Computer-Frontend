@@ -9,16 +9,18 @@ export default function Productspage() {
     const [loading, setLoading] = useState(true)
 
     useEffect(() => {
-        if (loading) {
-            api.get("/products").then((res) => {
+        api.get("/products")
+            .then((res) => {
+                console.log("DATA:", res.data)
                 setProducts(res.data)
-                setLoading(false)
-            }).catch((err) => {
-                console.log(err)
+            })
+            .catch((err) => {
+                console.log("API ERROR:", err)
+            })
+            .finally(() => {
                 setLoading(false)
             })
-        }
-    }, [loading])
+    }, [])
 
     return (
 
