@@ -3,12 +3,14 @@ import { useState } from "react";
 import toast, { Toaster } from "react-hot-toast";
 import api from "../utils/api";
 import { BsGoogle } from "react-icons/bs";
+import { useGoogleLogin } from "@react-oauth/google";
 
 export default function Login() {
 
     const [email, setEmail] = useState("")
     const [password, setPassword] = useState("")
     const [loading, setloading] = useState(false)
+    const googleLogin = useGoogleLogin()
     const navigate = useNavigate()
 
     async function handlelogin() {
