@@ -24,8 +24,8 @@ export default function Header() {
                     <Link to="/contact-us" className="text-slate-700 dark:text-slate-300 hover:text-accent dark:hover:text-accent-dark transition-colors">Contact Us</Link>
                 </div>
                 <div className="flex justify-center items-center gap-4">
-                    <button 
-                        onClick={toggleTheme} 
+                    <button
+                        onClick={toggleTheme}
                         className="p-2 rounded-full hover:bg-slate-200 dark:hover:bg-slate-800 text-slate-700 dark:text-slate-300 transition-colors"
                         aria-label="Toggle Theme"
                     >

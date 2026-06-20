@@ -10,7 +10,25 @@ export default function Login() {
     const [email, setEmail] = useState("")
     const [password, setPassword] = useState("")
     const [loading, setloading] = useState(false)
-    const googleLogin = useGoogleLogin()
+
+    const googleLogin = useGoogleLogin(
+        {
+            onSuccess: (response) => {
+                console.log(response)
+            },
+            onError: (error) => {
+                console.log(error)
+                api.post("/users/google-login", {
+                    access_token: response.access_token
+                }).then((res) => {
+                    console.log(res.data)
+                }).catch((error) => {
+                    console.log(error)
+                })
+            }
+        }
+    )
+
     const navigate = useNavigate()
 
     async function handlelogin() {
@@ -65,8 +83,10 @@ export default function Login() {
                     loading ? "Loading..." : "Login"
                 }
                 </button>
-                <p className="w-full h-2 text-sm mt-5 text-white text-left">Don't have a account? click{" "}<Link className="font-bold text-accent" to="/forget_pq">Here</Link></p>
-                <button className="w-full h-[50px] bg-accent mt-5 text-white rounded-lg flex justify-center items-center gap-2"><BsGoogle /> Sign In with Google</button>
+                <p className="w-full h-2 text-sm mt-5 text-white text-left">Don't have a account? click{" "}<Link className="font-bold text-accent/80" to="/forget_pq">Here</Link></p>
+                <button className="w-full h-[50px] bg-accent mt-5 text-white rounded-lg flex justify-center items-center gap-2 hover:bg-accent/80 transition duration-300"
+                    onClick={googleLogin}>
+                    <BsGoogle /> Sign In with Google</button>
 
             </div>
         </div>
