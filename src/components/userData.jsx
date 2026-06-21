@@ -34,8 +34,8 @@ export default function UserData() {
                         Login
                     </Link>
                     <span className="text-slate-400 mx-1"> | </span>
-                    <Link to="/register" className="text-slate-600 dark:text-slate-300 hover:text-accent dark:hover:text-accent-dark transition-colors">
-                        Register
+                    <Link to="/signup" className="text-slate-600 dark:text-slate-300 hover:text-accent dark:hover:text-accent-dark transition-colors">
+                        Sign up
                     </Link>
                 </div> :
                     <div className="text-slate-700 dark:text-slate-200 flex items-center font-medium">
@@ -53,6 +53,8 @@ export default function UserData() {
                                 }
                                 if (selected == "logout") {
                                     localStorage.removeItem("token");
+                                    setUser(null);
+                                    setValue("me");
                                     navigate("/")
                                 }
                             }

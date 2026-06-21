@@ -10,26 +10,32 @@ export default function Login() {
     const [email, setEmail] = useState("")
     const [password, setPassword] = useState("")
     const [loading, setloading] = useState(false)
+    const navigate = useNavigate()
 
     const googleLogin = useGoogleLogin(
         {
             onSuccess: (response) => {
                 console.log(response)
+                api.post("/users/google-login", {
+                    accessToken: response.access_token
+                }).then((res) => {
+                    console.log(res.data)
+                    localStorage.setItem("token", res.data.token)
+                    if (res.data.isadmin) {
+                        navigate("/admin")
+                    } else {
+                        navigate("/")
+                    }
+                }).catch((error) => {
+                    toast.error(error?.response?.data?.message || "An error occurred during login.");
+                })
             },
             onError: (error) => {
                 console.log(error)
-                api.post("/users/google-login", {
-                    access_token: response.access_token
-                }).then((res) => {
-                    console.log(res.data)
-                }).catch((error) => {
-                    console.log(error)
-                })
             }
         }
     )
 
-    const navigate = useNavigate()
 
     async function handlelogin() {
         setloading(true)

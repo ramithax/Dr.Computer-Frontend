@@ -68,14 +68,14 @@ export default function AdminPage() {
             </div>
 
             <div className="w-[calc(100%-300px)] h-full p-4">
-                user == null ? <LoadingScreen /> :
-                <Routes>
-                    <Route path="/" element={<AdminOrdersPage />} />
-                    <Route path="products" element={<AdminProductsPage />} />
-                    <Route path="users" element={<h1>Users Page</h1>} />
-                    <Route path="addproduct" element={<AdminAddProductForm />} />
-                    <Route path="editproduct/:productId" element={<AdminEditProductForm />} />
-                </Routes>
+                {user == null ? <LoadingScreen /> :
+                    <Routes>
+                        <Route path="/" element={<AdminOrdersPage />} />
+                        <Route path="products" element={<AdminProductsPage />} />
+                        <Route path="users" element={<h1>Users Page</h1>} />
+                        <Route path="addproduct" element={<AdminAddProductForm />} />
+                        <Route path="editproduct/:productId" element={<AdminEditProductForm />} />
+                    </Routes>}
             </div>
         </div>
     )
