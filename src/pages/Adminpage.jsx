@@ -9,6 +9,7 @@ import AdminOrdersPage from "./Admin/adminOrdersPage";
 import api from "../utils/api";
 import { useState, useEffect } from "react";
 import LoadingScreen from "../components/loadingScreen";
+import AdminUsersPage from "./Admin/adminUsersPage";
 
 export default function AdminPage() {
 
@@ -41,42 +42,42 @@ export default function AdminPage() {
     }, [])
 
     return (
-        <div className="w-full h-full flex bg-white">
+        <div className="w-full min-h-screen flex bg-white">
 
-            <div className="w-[300px] h-full bg-white flex flex-col shadow-2xl">
+            {/* Sidebar */}
+            <div className="w-[300px] h-screen fixed left-0 top-0 bg-white flex flex-col shadow-2xl">
                 <div className="w-full h-[100px] py-4 px-2">
-
-                    <img src="/logo.png" className="h-full " />
-
+                    <img src="/logo.png" className="h-full object-contain" />
                 </div>
 
-                <Link to="/admin" className="w-full p-4 text-xl text-gray-500  flex items-center gap-4">
+                <Link to="/admin" className="w-full p-4 text-xl text-gray-500 flex items-center gap-4 hover:bg-gray-100 hover:text-black transition">
                     <FiShoppingCart />
-                    <span className="w-full h-full block ">Orders</span>
+                    <span>Orders</span>
                 </Link>
 
-                <Link to="/admin/products" className="w-full p-4 text-xl text-gray-500  flex items-center gap-4">
+                <Link to="/admin/products" className="w-full p-4 text-xl text-gray-500 flex items-center gap-4 hover:bg-gray-100 hover:text-black transition">
                     <BsGift />
-                    <span className="w-full h-full block ">Products</span>
+                    <span>Products</span>
                 </Link>
 
-                <Link to="/admin/users" className="w-full p-4 text-xl text-gray-500  flex items-center gap-4">
+                <Link to="/admin/users" className="w-full p-4 text-xl text-gray-500 flex items-center gap-4 hover:bg-gray-100 hover:text-black transition">
                     <TbUsers />
-                    <span className="w-full h-full block ">Users</span>
+                    <span>Users</span>
                 </Link>
-
             </div>
 
-            <div className="w-[calc(100%-300px)] h-full p-4">
+            {/* Content */}
+            <div className="ml-[300px] w-[calc(100%-300px)] min-h-screen p-4 overflow-y-auto">
                 {user == null ? <LoadingScreen /> :
                     <Routes>
                         <Route path="/" element={<AdminOrdersPage />} />
                         <Route path="products" element={<AdminProductsPage />} />
-                        <Route path="users" element={<h1>Users Page</h1>} />
+                        <Route path="users" element={<AdminUsersPage />} />
                         <Route path="addproduct" element={<AdminAddProductForm />} />
                         <Route path="editproduct/:productId" element={<AdminEditProductForm />} />
                     </Routes>}
             </div>
+
         </div>
     )
 }
