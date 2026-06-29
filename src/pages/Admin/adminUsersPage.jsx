@@ -17,7 +17,7 @@ export default function AdminUsersPage() {
         if (loading) {
             const token = localStorage.getItem("token");
             api
-                .get("/users/all/" + pageNumber + "/" + pageSize, {}, {
+                .get("/users/all/" + pageNumber + "/" + pageSize, {
                     headers: {
                         Authorization: `Bearer ${token}`,
                     },
@@ -34,29 +34,41 @@ export default function AdminUsersPage() {
 
     function handleBlockUser(email) {
 
-        const token = localStorage.getItem("token");
-        api.put("/users/block/" + email, {}, {
-            headers: {
-                Authorization: `Bearer ${token}`,
-            },
-        })
-            .then((res) => {
-                toast.success(res.data.message);
-                setLoading(true);
-            });
+        try {
+
+            const token = localStorage.getItem("token");
+            api.put("/users/block/" + email, {}, {
+                headers: {
+                    Authorization: `Bearer ${token}`,
+                },
+            })
+                .then((res) => {
+                    toast.success(res.data.message);
+                    setLoading(true);
+                });
+        }
+        catch (error) {
+            toast.error(error.response.data.message);
+        }
     }
 
     function handleRoleToggle(email) {
 
-        const token = localStorage.getItem("token");
-        api.put("/users/role/" + email, {
-            headers: {
-                Authorization: `Bearer ${token}`,
-            },
-        }).then((res) => {
-            toast.success(res.data.message);
-            setLoading(true);
-        });
+        try {
+
+            const token = localStorage.getItem("token");
+            api.put("/users/role/" + email, {}, {
+                headers: {
+                    Authorization: `Bearer ${token}`,
+                },
+            }).then((res) => {
+                toast.success(res.data.message);
+                setLoading(true);
+            });
+        }
+        catch (error) {
+            toast.error(error.response.data.message);
+        }
     }
 
 
